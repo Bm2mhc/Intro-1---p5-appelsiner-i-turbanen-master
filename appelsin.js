@@ -6,7 +6,6 @@ var yspeed = -10;
 var newspeed;
 var grav = 0.1;
 var col = [200, 100, 0];
-var missed = 0
 
 // Turbanen
 var turban;
@@ -14,7 +13,7 @@ var turban;
 // Øvrige
 var tid = 150;
 var score = 0;
-
+var missed = 0;
 
 
 function appelsin() {
@@ -42,6 +41,9 @@ this.appelsin = function () {
         }
         if (y < 0) {
             yspeed *= -1;
+        }
+        if (score > 4){
+            
         }
     }
 

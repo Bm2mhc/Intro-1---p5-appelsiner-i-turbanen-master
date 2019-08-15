@@ -12,7 +12,7 @@ var yspeed = -10;
 var newspeed;
 var grav = 0.1;
 var col = [200,100,0];
-var missed = 0
+
 
 // Turbanen
 var turban;
@@ -21,6 +21,7 @@ var appelsin;
 // Øvrige
 var tid = 150;
 var score = 0;
+var missed = 0;
 
 /* 
  * 
