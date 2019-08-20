@@ -13,6 +13,8 @@ var newspeed;
 var grav = 0.1;
 var col = [200, 100, 0];
 var missed = 0
+var col = [200,100,0];
+
 
 // Turbanen
 var turban;
@@ -22,6 +24,8 @@ var appelsin;
 var tid = 150;
 var score = 4;
 
+var score = 0;
+var missed = 0;
 
 function setup() {
     createCanvas(750, 600);
@@ -74,6 +78,8 @@ function checkScore() {
 }
 
 
+    
+//Test
 
 function keyPressed() {
 
