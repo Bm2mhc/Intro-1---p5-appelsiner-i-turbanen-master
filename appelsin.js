@@ -1,3 +1,22 @@
+var x = 0;
+var y = 550;
+var rad = 20;
+var xspeed = 4;
+var yspeed = -10;
+var newspeed;
+var grav = 0.1;
+var col = [200, 100, 0];
+var missed = 0
+
+// Turbanen
+var turban;
+
+// Øvrige
+var tid = 150;
+var score = 0;
+
+
+
 function appelsin() {
     this.x = 0;
     this.y = 550;
@@ -38,8 +57,6 @@ this.appelsin = function () {
         }
         if (x > 750){
             xspeed *=-1
-        if (score > 4){
-            
         }
     }
 

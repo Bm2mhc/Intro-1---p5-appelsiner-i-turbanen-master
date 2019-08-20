@@ -13,16 +13,14 @@ var newspeed;
 var grav = 0.1;
 var col = [200, 100, 0];
 var missed = 0
-var header;
-
 
 // Turbanen
 var turban;
 
 // Øvrige
-var score = 0;
-var missed = 0;
-var appelsiner = [];
+var tid = 150;
+var score = 4;
+
 
 function setup() {
     header = createElement('h1', 'Appelsiner i turban')
