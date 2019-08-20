@@ -25,8 +25,18 @@ function appelsin() {
             fill(this.col);
             ellipse(this.x, this.y, this.rad * 2, this.rad * 2);
         }
+
+    
+this.appelsin = function () {
+    if (tid > 0) {
+        tid -= 1;
     }
-    this.move = function () {
+    if (tid < 100) {
+        fill(col);
+        ellipse(x, y, rad * 2, rad * 2);
+    }
+}
+    this.move = function(){
         //Her skal vi sørge for at appelsinen bevæger sig, hvis den er startet
         if (this.tid <= 0) {
             this.x += this.xspeed;
@@ -37,23 +47,27 @@ function appelsin() {
             this.missed += 1
             this.shootNew();
         }
-        if (this.y < 0) {
-            this.yspeed *= -1;
+        if (y < 0) {
+            yspeed *= -1;
+        }
+        if (x > 750){
+            xspeed *=-1
+        if (score > 4){
+            
         }
     }
 
-        this.shootNew = function () {
-            //Her skal vi sørge for at en ny appelsin skydes afsted 
-            this.x = this.rad;
-            this.y = random(250, 550);
-            this.yspeed = this.newspeed;
-            this.xspeed = 6 * Math.random();
-            this.tid = (int)(Math.random() * 400);
+    this.shootNew =  function() {
+        //Her skal vi sørge for at en ny appelsin skydes afsted 
+        x = rad;
+        y = random("550");
+        yspeed = newspeed;
+        xspeed = 6 * Math.random();
+        tid = (int)(Math.random() * 400);
 
-
-        }
 
         
 
     }
 
+}
