@@ -43,6 +43,9 @@ this.appelsin = function () {
         if (y < 0) {
             yspeed *= -1;
         }
+        if (x > 750){
+            xspeed *=-1
+        }
     }
 
     this.shootNew =  function() {
