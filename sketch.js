@@ -13,6 +13,7 @@ var newspeed;
 var grav = 0.1;
 var col = [200, 100, 0];
 var missed = 0
+var appelsiner;
 
 // Turbanen
 var turban;
@@ -29,7 +30,7 @@ function setup() {
     x = rad;
     turban = new Kurv(670, 100, 70, 50, 10);
     appelsiner.push(new appelsin(670, 100, 70, 50, 10));
-//
+
     setInterval(function(){
         appelsiner.push(new appelsin(670, 100, 70, 50, 10))
     }, 30000);

@@ -72,5 +72,3 @@ this.appelsin = function () {
     }
 
 }
-
-}
