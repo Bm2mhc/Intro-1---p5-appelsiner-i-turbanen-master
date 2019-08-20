@@ -7,31 +7,17 @@ function appelsin() {
     this.newspeed = yspeed;
     this.grav = 0.1;
     this.col = [200, 100, 0];
+    var tid = 20;
 
     // Turbanen
     this.turban;
 
-    // Øvrige
-    this.tid = 20;
-    this.score = 0;
-    this.missed = 0;
-
-//H
-    this.appelsin = function () {
-        if (this.tid > 0) {
-            this.tid -= 1;
-        }
-       if (this.tid < 100) {
-            fill(this.col);
-            ellipse(this.x, this.y, this.rad * 2, this.rad * 2);
-        }
-
     
 this.appelsin = function () {
-    if (tid > 0) {
-        tid -= 1;
+    if (this.tid > 0) {
+        this.tid -= 1;
     }
-    if (tid < 100) {
+    if (this.tid < 100) {
         fill(col);
         ellipse(x, y, rad * 2, rad * 2);
     }
@@ -66,8 +52,8 @@ this.appelsin = function () {
         tid = (int)(Math.random() * 400);
 
 
-        
-
     }
+
+}
 
 }
