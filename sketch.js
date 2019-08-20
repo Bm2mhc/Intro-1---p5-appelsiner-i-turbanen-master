@@ -13,34 +13,43 @@ var newspeed;
 var grav = 0.1;
 var col = [200, 100, 0];
 var missed = 0
-var col = [200,100,0];
+var header;
 
 
 // Turbanen
 var turban;
-var appelsin;
 
 // Øvrige
-var tid = 150;
-var score = 4;
-
 var score = 0;
 var missed = 0;
+var appelsiner = [];
 
 function setup() {
+    header = createElement('h1', 'Appelsiner i turban')
     createCanvas(750, 600);
     newspeed = yspeed;
     x = rad;
     turban = new Kurv(670, 100, 70, 50, 10);
-    appelsin = new appelsin(670, 100, 70, 50, 10)
+    appelsiner.push(new appelsin(670, 100, 70, 50, 10));
+//
+    setInterval(function(){
+        appelsiner.push(new appelsin(670, 100, 70, 50, 10))
+    }, 30000);
 }
 
 function draw() {
+
     background(0);
-    appelsin.move();
-    turban.move();
+    for (var i = 0; i < appelsiner.length; i++){
+     
+        appelsiner[i].move();
+        appelsiner[i].appelsin();
+        
+    }
     checkScore();
     display();
+    turban.move();
+  
 }
 
 function display() {
@@ -53,33 +62,27 @@ function display() {
 
 
     // Her vises turbanen - foreløbig blot en firkant
-    appelsin.appelsin();
     turban.tegn();
     
-}
-
-function flerebolde() {
-    appelsin.appelsin();
-
 }
 
 function checkScore() {
     // Her checkes om turbanen har fanget appelsinen. Hvis ja, skydes en ny appelsin afsted
     if (yspeed > 10) {
         if (turban.grebet(x, y, rad)) {
-            score += 1;
-            appelsin.shootNew();
+           score += 1;
+            appelsiner.shootNew();
         }
     }
-    if (score > 4) {
-        appelsin.appelsin();
+
+    if (x> width || y > height){
+        missed -= 1;
+        appelsiner.shootNew();
     }
+
 
 }
 
-
-    
-//Test
 
 function keyPressed() {
 
