@@ -9,19 +9,20 @@ var y = 550;
 var rad = 20;
 var xspeed = 4;
 var yspeed = -10;
-var newspeed;
+var newspeed = yspeed;
 var grav = 0.1;
 var col = [200, 100, 0];
 var missed = 0
-var appelsiner;
+var header;
+
 
 // Turbanen
 var turban;
 
 // Øvrige
-var tid = 150;
-var score = 4;
-
+var score = 0;
+var missed = 0;
+var appelsiner= [];
 
 function setup() {
     header = createElement('h1', 'Appelsiner i turban')
@@ -30,10 +31,10 @@ function setup() {
     x = rad;
     turban = new Kurv(670, 100, 70, 50, 10);
     appelsiner.push(new appelsin(670, 100, 70, 50, 10));
-
+//
     setInterval(function(){
         appelsiner.push(new appelsin(670, 100, 70, 50, 10))
-    }, 30000);
+    }, 3000);
 }
 
 function draw() {
@@ -43,51 +44,53 @@ function draw() {
      
         appelsiner[i].move();
         appelsiner[i].appelsin();
+      
         
     }
     checkScore();
     display();
     turban.move();
-  
 }
 
 function display() {
     fill(255);
-    text("Score: " + score, width - 80, 30);
+    text("Score: "+ score, width-80, 30);
     fill(255)
-    text("Missed: " + missed, width - 80, 50);
-
-    //Her skal vi sørge for at appelsinen bl iver vist, hvis den skal vises
-
+    text("Missed: "+ missed, width-80, 50);
+    
+    //Her skal vi sørge for at appelsinen bliver vist, hvis den skal vises
+ 
 
     // Her vises turbanen - foreløbig blot en firkant
     turban.tegn();
-    
 }
 
 function checkScore() {
     // Her checkes om turbanen har fanget appelsinen. Hvis ja, skydes en ny appelsin afsted
     if (yspeed > 10) {
         if (turban.grebet(x, y, rad)) {
-           score += 1;
-            appelsiner.shootNew();
+            score += 1;
+            appelsiner.shift()
         }
     }
-
-    if (x> width || y > height){
-        missed -= 1;
-        appelsiner.shootNew();
+    for (var i = 0; i < appelsiner.length; i++){
+     
+        if (turban.grebet(appelsiner[i].x, appelsiner[i].y, appelsiner[i].rad)) {
+            score += 1;
+            appelsiner.shift()
+        }
+        
     }
 
-
 }
+    
 
 
 function keyPressed() {
-
+   
 }
 
-function mousePressed() {
+function mousePressed(){
 
 }
 
@@ -96,23 +99,18 @@ OPGAVER
  Opgave 1 - undersøg hvad variablerne  grav  og  tid  bruges til.
             Skriv det i kommentarer, prøv at se hvad der sker, når
             I laver dem om. 
-        tjek
 
  Opgave 2 - lav programmet om så det er tilfældigt hvor højt oppe 
             på venstre kan appelsinerne starter. Overvej om man kan 
             sikre, at appelsinen ikke ryger ud af skærmens top men 
             stadig har en "pæn" bane
-        tjek
 
  Opgave 3 - lav programmet om så man også kan bevæge turbanen mod
             højre og venstre med A- og D-tasterne. Prøv jer frem med
             forskellige løsninger for hvor hurtigt turbanen skal rykke
-        tjek
 
  Opgave 4 - ret programmet til, så det også angives hvor mange 
             appelsiner man IKKE greb med turbanen
-
-        tjek
 
  Opgave 5 - Undersøg hvad scriptet  kurv.js  er og gør, samt hvad de 
             funktioner, scriptet indeholder, skal bruges til. Skriv 
@@ -120,14 +118,12 @@ OPGAVER
             hvad sammenhængen mellem dette script og turbanen i hoved-
             programmet er, og forklar det med kommentarer i toppen af 
             kurv.js
-        tjek
 
  Opgave 6 - find et billede af en turban og sæt det ind i stedet 
             for firkanten. Find eventuelt også en lyd, der kan afspilles, 
             når appelsinen gribes. Se gerne i "p5 Reference" hvordan, 
             hvis ikke I kan huske det:   https://p5js.org/reference/
             Lav programmet om, så man kan flytte turbanen med musen
-    tjek
 
  Opgave 7 - lav en Appelsin-klasse, lige som der er en Kurv-klasse. 
             Flyt koden til appelsinen ud i et selvstændigt script.
@@ -135,7 +131,6 @@ OPGAVER
             der skal lægges over i det nye script, herunder hvordan det 
             kommer til at berøre turbanen. Skriv jeres overvejelser i 
             kommentarerne
-    tjek
 
  Opgave 8 - ret programmet til, så der kan være flere appelsiner i 
             luften på en gang, dvs. at der kan skydes en ny appelsin
