@@ -14,6 +14,8 @@ var grav = 0.1;
 var col = [200, 100, 0];
 var missed = 0
 var header;
+var spill = true;
+var buttion;
 
 
 // Turbanen
@@ -22,7 +24,7 @@ var turban;
 // Øvrige
 var score = 0;
 var missed = 0;
-var appelsiner= [];
+var appelsiner = [];
 
 function setup() {
     header = createElement('h1', 'Appelsiner i turban')
@@ -31,35 +33,54 @@ function setup() {
     x = rad;
     turban = new Kurv(670, 100, 70, 50, 10);
     appelsiner.push(new appelsin(670, 100, 70, 50, 10));
-//
-    setInterval(function(){
+    //
+    setInterval(function () {
         appelsiner.push(new appelsin(670, 100, 70, 50, 10))
     }, 3000);
 }
 
 function draw() {
 
-    background(0);
-    for (var i = 0; i < appelsiner.length; i++){
-     
-        appelsiner[i].move();
-        appelsiner[i].appelsin();
-      
-        
+  
+
+    if (spill) {
+        background(0);
+        for (var i = 0; i < appelsiner.length; i++) {
+
+            appelsiner[i].move();
+            appelsiner[i].appelsin();
+
+
+        }
+        checkScore();
+        display();
+        turban.move();
+    } else {
+
+        document.getElementById('status').innerHTML = 'Game Over';
+        button = createButton('Genstart');
+        button.position(310, 375);
+        button.mousePressed(restartGame);
     }
-    checkScore();
-    display();
-    turban.move();
+
+    if (missed < 1) {
+        spil = false;
+    }
+
+}
+
+function restartGame() {
+    location.reload();
 }
 
 function display() {
     fill(255);
-    text("Score: "+ score, width-80, 30);
+    text("Score: " + score, width - 80, 30);
     fill(255)
-    text("Missed: "+ missed, width-80, 50);
-    
+    text("Missed: " + missed, width - 80, 50);
+
     //Her skal vi sørge for at appelsinen bliver vist, hvis den skal vises
- 
+
 
     // Her vises turbanen - foreløbig blot en firkant
     turban.tegn();
@@ -73,24 +94,29 @@ function checkScore() {
             appelsiner.shift()
         }
     }
-    for (var i = 0; i < appelsiner.length; i++){
-     
+    for (var i = 0; i < appelsiner.length; i++) {
+
         if (turban.grebet(appelsiner[i].x, appelsiner[i].y, appelsiner[i].rad)) {
             score += 1;
             appelsiner.shift()
         }
-        
+
+        if (x > 750 || y > 600){
+            missed += 1;
+            appelsiner.shift();
+        }
+
     }
 
 }
-    
+
 
 
 function keyPressed() {
-   
+
 }
 
-function mousePressed(){
+function mousePressed() {
 
 }
 
