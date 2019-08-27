@@ -1,7 +1,6 @@
-
+var missed = 0;
 
 function appelsin() {
-    var missed = 0;
     this.x = 0;
     this.y = 550;
     this.rad = 20;
@@ -42,7 +41,7 @@ function appelsin() {
             this.y += this.yspeed;
             this.yspeed += this.grav;
         }
-       /* if (this.x > width || this.y > height) {
+        if (this.x > width || this.y > height) {
 
             appelsiner.shift()
           missed += 1
@@ -50,7 +49,7 @@ function appelsin() {
         }
         if (this.y < 0) {
             this.yspeed *= -1;
-        }*/
+        }
     }
 
 

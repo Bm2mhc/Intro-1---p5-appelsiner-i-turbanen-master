@@ -28,6 +28,8 @@ var appelsiner = [];
 
 function setup() {
     header = createElement('h1', 'Appelsiner i turban')
+    var status = document.getElementById("status");
+    status.innerHTML = 'Lorte spillet er igang';
     createCanvas(750, 600);
     newspeed = yspeed;
     x = rad;
@@ -59,12 +61,12 @@ function draw() {
 
         document.getElementById('status').innerHTML = 'Game Over';
         button = createButton('Genstart');
-        button.position(310, 375);
+        button.position(350, 375);
         button.mousePressed(restartGame);
     }
 
-    if (missed < 1) {
-        spil = false;
+    if (missed > 1) {
+        spill = false;
     }
 
 }
@@ -99,11 +101,6 @@ function checkScore() {
         if (turban.grebet(appelsiner[i].x, appelsiner[i].y, appelsiner[i].rad)) {
             score += 1;
             appelsiner.shift()
-        }
-
-        if (x > 750 || y > 600){
-            missed += 1;
-            appelsiner.shift();
         }
 
     }
