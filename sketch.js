@@ -12,34 +12,47 @@ var yspeed = -10;
 var newspeed;
 var grav = 0.1;
 var col = [200, 100, 0];
+<<<<<<< HEAD
+=======
+var missed = 0
+var header;
+>>>>>>> 6ae1f5482628a584f797ea21ef2e85437ece605c
 
 
 // Turbanen
 var turban;
-var appelsin;
 
 // Øvrige
-var tid = 150;
 var score = 0;
 var missed = 0;
+var appelsiner = [];
 
-/* 
- * 
- */
 function setup() {
+    header = createElement('h1', 'Appelsiner i turban')
     createCanvas(750, 600);
     newspeed = yspeed;
     x = rad;
     turban = new Kurv(670, 100, 70, 50, 10);
-    appelsin = new appelsin(670, 100, 70, 50, 10)
+    appelsiner.push(new appelsin(670, 100, 70, 50, 10));
+//
+    setInterval(function(){
+        appelsiner.push(new appelsin(670, 100, 70, 50, 10))
+    }, 30000);
 }
 
 function draw() {
+
     background(0);
-    appelsin.move();
+    for (var i = 0; i < appelsiner.length; i++){
+     
+        appelsiner[i].move();
+        appelsiner[i].appelsin();
+        
+    }
     checkScore();
     display();
     turban.move();
+  
 }
 
 function display() {
@@ -48,26 +61,44 @@ function display() {
     fill(255)
     text("Missed: " + missed, width - 80, 50);
 
+<<<<<<< HEAD
     //Her skal vi sørge for at appelsinen bliver vist, hvis den skal vises
+=======
+    //Her skal vi sørge for at appelsinen bl iver vist, hvis den skal vises
+>>>>>>> 6ae1f5482628a584f797ea21ef2e85437ece605c
 
 
     // Her vises turbanen - foreløbig blot en firkant
-    appelsin.appelsin();
     turban.tegn();
+    
 }
 
 function checkScore() {
     // Her checkes om turbanen har fanget appelsinen. Hvis ja, skydes en ny appelsin afsted
     if (yspeed > 10) {
         if (turban.grebet(x, y, rad)) {
+<<<<<<< HEAD
             score += 1;
             appelsin.shootNew();
+=======
+           score += 1;
+            appelsiner.shootNew();
+>>>>>>> 6ae1f5482628a584f797ea21ef2e85437ece605c
         }
     }
 
+    if (x> width || y > height){
+        missed -= 1;
+        appelsiner.shootNew();
+    }
+
+
 }
 
+<<<<<<< HEAD
 //Test
+=======
+>>>>>>> 6ae1f5482628a584f797ea21ef2e85437ece605c
 
 function keyPressed() {
 
@@ -81,32 +112,48 @@ function mousePressed() {
 OPGAVER
  Opgave 1 - undersøg hvad variablerne  grav  og  tid  bruges til.
             Skriv det i kommentarer, prøv at se hvad der sker, når
+<<<<<<< HEAD
             I laver dem om.
+=======
+            I laver dem om. 
+        tjek
+>>>>>>> 6ae1f5482628a584f797ea21ef2e85437ece605c
 
  Opgave 2 - lav programmet om så det er tilfældigt hvor højt oppe
             på venstre kan appelsinerne starter. Overvej om man kan
             sikre, at appelsinen ikke ryger ud af skærmens top men
             stadig har en "pæn" bane
+        tjek
 
  Opgave 3 - lav programmet om så man også kan bevæge turbanen mod
             højre og venstre med A- og D-tasterne. Prøv jer frem med
             forskellige løsninger for hvor hurtigt turbanen skal rykke
+        tjek
 
  Opgave 4 - ret programmet til, så det også angives hvor mange
             appelsiner man IKKE greb med turbanen
 
+<<<<<<< HEAD
  Opgave 5 - Undersøg hvad scriptet  kurv.js  er og gør, samt hvad de
             funktioner, scriptet indeholder, skal bruges til. Skriv
+=======
+        tjek
+
+ Opgave 5 - Undersøg hvad scriptet  kurv.js  er og gør, samt hvad de 
+            funktioner, scriptet indeholder, skal bruges til. Skriv 
+>>>>>>> 6ae1f5482628a584f797ea21ef2e85437ece605c
             det som kommentarer oven over hver funktion. Forklar tillige,
             hvad sammenhængen mellem dette script og turbanen i hoved-
             programmet er, og forklar det med kommentarer i toppen af
             kurv.js
+        tjek
 
  Opgave 6 - find et billede af en turban og sæt det ind i stedet
             for firkanten. Find eventuelt også en lyd, der kan afspilles,
             når appelsinen gribes. Se gerne i "p5 Reference" hvordan,
             hvis ikke I kan huske det:   https://p5js.org/reference/
             Lav programmet om, så man kan flytte turbanen med musen
+    tjek
 
  Opgave 7 - lav en Appelsin-klasse, lige som der er en Kurv-klasse.
             Flyt koden til appelsinen ud i et selvstændigt script.
@@ -114,6 +161,7 @@ OPGAVER
             der skal lægges over i det nye script, herunder hvordan det
             kommer til at berøre turbanen. Skriv jeres overvejelser i
             kommentarerne
+    tjek
 
  Opgave 8 - ret programmet til, så der kan være flere appelsiner i
             luften på en gang, dvs. at der kan skydes en ny appelsin

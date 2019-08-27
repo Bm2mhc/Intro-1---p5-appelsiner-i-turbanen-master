@@ -33,7 +33,7 @@ function Kurv(x, y, bredde, dybde, speed) {
 
     //hvis den er grebet starter den forfra
     this.grebet = function(xa, ya, ra) {
-        if ((ya < this.y+30 && ya > this.y-30) && xa > this.x+ra && xa < this.x+this.bred-ra) {
+        if ((ya < this.y+80 && ya > this.y-20) && xa > this.x+ra && xa < this.x+this.bred-ra) {
             return true;
         }
         else {
