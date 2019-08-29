@@ -1,10 +1,10 @@
 /*
-Først laver vi et nogle variable til at lave en appelsin
- - en kugle som vi vil skyde afsted og fange i en turban
+Først laver vi variabler til turbanen, Title, Tid, score, missede, om spillet er i gang og til multiplayer
 */
 
 // Turban variable
 var turban;
+
 // Header/Title variable
 var header;
 
@@ -13,6 +13,7 @@ var tid = 10;
 var score = 0;
 var missed = 0;
 var spil = true;
+var knap;
 
 //laver Appelsin arrayed
 var appelsiner = [];
@@ -23,7 +24,7 @@ var socket;
 function setup() {
 
 
-    if (missed < 3) {
+    if (spil) {
         var status = document.getElementById('status');
         status.innerHTML = 'Lorte spillet er i gang';
         createCanvas(windowWidth, windowHeight);
@@ -39,11 +40,20 @@ function setup() {
         }
         socket.onMessage(handleMessage);
     } else {
-
+        document.getElementById('status').innerHTML = 'Du tabte';
         status.createButton('Restart?')
+        status.position(windowWidth/2, windowHeight/2);
+        status.mousePressed(Genstartspillet);
         
 
     }
+    if (missed > 3 ){
+        spil = false;
+    }
+}
+
+function Genstartspillet() {
+    location.reload();
 }
 
 function handleMessage(msg) {
@@ -73,8 +83,9 @@ function move() {
         } else {
             appelsin.move();
         }
-        if (appelsin.y > windowHeight+10){
+        if (appelsin.y > windowHeight){
             missed += 1;
+            appelsiner.splice(i, 1);
         }
     }
 }
@@ -121,11 +132,11 @@ function draw() {
     }else{
      
         document.getElementById('status').innerHTML = 'Game Over';
-        button = createButton('Restart Game');
-        button.position(300, 325);
-        button.mousePressed(restartGame);
+        knap = createButton('Genstart spil');
+        knap.position(300, 325);
+        knap.mousePressed(restartGame);
     }
-    if (missed > 1){
+    if (missed > 2){
         spil = false;
     }
 

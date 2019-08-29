@@ -14,6 +14,7 @@ class Kurv {
         this.dyb = dybde;
         this.speed = speed;
         this.col = [250, 230, 150];
+        this.img = loadImage('turban.png');
     }
 
     tegn() {
@@ -25,7 +26,8 @@ class Kurv {
             this.x = Math.min(this.x + this.speed, width - this.bred);
         }
         fill(this.col);
-        rect(this.x, this.y, this.bred, this.dyb);
+        image(this.img, this.x, this.y, this.bred, this.dyb);
+        //rect(this.x, this.y, this.bred, this.dyb);
     }
 
     grebet(x, y) {
