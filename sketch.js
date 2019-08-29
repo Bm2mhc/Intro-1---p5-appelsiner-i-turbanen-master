@@ -21,37 +21,54 @@ var appelsiner = [];
 //laver variablen til socket
 var socket;
 
+// i setup gør vi multiplayer og canvas klar
 function setup() {
 
+    var status = document.getElementById('status');
 
+    //laver en if kommand som stopper spillet hvis man får for mange misses
     if (spil) {
-        var status = document.getElementById('status');
+        // Skaber informations diven
         status.innerHTML = 'Lorte spillet er i gang';
+
+        //Skaber canvas
         createCanvas(windowWidth, windowHeight);
+
+        //Skaber headeren
         header = createElement('h1', 'Appelsiner i turban')
-        x = rad;
+   
+        //kalder kurven 
         turban = new Kurv(windowWidth / 2, windowHeight - 100, 150, 50, 10);
 
+        //gør klar til at have multiplayer
+        // Starter med en alert
         if (confirm('Vil du joine et igangværende spil?')) {
+            //En prompt til en pin fra den anden computer
             var pin = prompt('Pin:');
             socket = ElineSocket.connect(pin);
         } else {
+            //skaber en pin som kan indsættes i den anden prompt
             socket = ElineSocket.create();
         }
         socket.onMessage(handleMessage);
     } else {
+        //ændre informations diven til en taber tekst
         document.getElementById('status').innerHTML = 'Du tabte';
+
+        //skaber en genstart knap
         status.createButton('Restart?')
         status.position(windowWidth/2, windowHeight/2);
         status.mousePressed(Genstartspillet);
         
 
     }
+    //diffinere hvordan spill bliver false
     if (missed > 3 ){
         spil = false;
     }
 }
 
+//function til at genstarte spillet
 function Genstartspillet() {
     location.reload();
 }
@@ -73,16 +90,20 @@ function shootNew(x) {
     appelsiner.push(new Appelsin(x, dx, dy));
 }
 
+// Får appelsinerne til at bevæge sig
 function move() {
     for (var i = 0; i < appelsiner.length; i++) {
         const appelsin = appelsiner[i];
 
+        //Her fjernes appelsinerne hvis de ryger ud af banen
         if (appelsin.isOutOfBounds()) {
             appelsiner.splice(i, 1);
             i--;
+        //ellers bevæger appelsinerne sig
         } else {
             appelsin.move();
         }
+        //hvis appelsinerne ryger ud i bunden forsvinder appelsinerne og missed stiger
         if (appelsin.y > windowHeight){
             missed += 1;
             appelsiner.splice(i, 1);
@@ -94,6 +115,7 @@ function checkScore() {
     for (var i = 0; i < appelsiner.length; i++) {
         const appelsin = appelsiner[i];
         if (appelsin.dy > 0) {
+            //tjekker om turban bliver grebet og fjerner dem hvis de bliver grebet
             if (turban.grebet(appelsin.x, appelsin.y)) {
                 score += 1;
                 appelsiner.splice(i, 1);
@@ -104,16 +126,19 @@ function checkScore() {
 }
 
 function display() {
+    //laver en bagrund
     background(0);
 
     for (var i = 0; i < appelsiner.length; i++) {
         const appelsin = appelsiner[i];
+        //kører display
         appelsin.display();
     }
 
     // Her vises turbanen - foreløbig blot en firkant
     turban.tegn();
 
+    //laver text om score, pin og missed
     fill(255)
     text("Score: " + score, width - 80, 30);
     text("Pin: " + socket.id, width - 80, 60);
@@ -131,10 +156,10 @@ function draw() {
 
     }else{
      
-        document.getElementById('status').innerHTML = 'Game Over';
-        knap = createButton('Genstart spil');
+        document.getElementById('status').innerHTML = 'Du tabte';
+        knap = createButton('Restart?');
         knap.position(300, 325);
-        knap.mousePressed(restartGame);
+        knap.mousePressed(Genstartspillet);
     }
     if (missed > 2){
         spil = false;
@@ -142,6 +167,8 @@ function draw() {
 
 
 }
+
+//Skyder en ny hvis man klikker på musen
 
 function mouseClicked() {
     socket.sendMessage({
